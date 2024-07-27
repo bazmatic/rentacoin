@@ -1,27 +1,34 @@
 /* app/globals.css or styles/globals.css */
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-  /* Layout */
-  .container-main {
-    @apply min-h-screen bg-gradient-to-br from-gray-900 to-black text-cyan-300 p-8;
+@layer base {
+  body {
+    @apply bg-black min-h-screen;
   }
+}
+
+@layer components {
+
+  .main-content {
+    @apply flex flex-col items-center justify-center h-full bg-black text-cyan-300;
+  }
+   .container-main {
+    @apply bg-black text-cyan-300 p-8;
+   }
 
   /* Typography */
   .heading-primary {
-    @apply text-4xl font-bold mb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500;
-  }
-
-  .text-gradient {
-    @apply text-transparent bg-clip-text bg-gradient-to-r;
+    @apply text-4xl font-bold mb-8 text-center;
   }
 
   /* Cards */
   .card-base {
-    @apply bg-gray-800 border-2 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg;
+    @apply bg-gray-800 border-2 rounded-xl;
   }
 
   .card-header {
@@ -32,63 +39,18 @@
     @apply p-4;
   }
 
-  /* Card variations */
-  .card-primary {
-    @apply card-base border-cyan-500 hover:shadow-cyan-500/50;
-  }
-
-  .card-primary .card-header {
-    @apply bg-gradient-to-r from-cyan-500 to-blue-500;
-  }
-
-  .card-secondary {
-    @apply card-base border-purple-500 hover:shadow-purple-500/50;
-  }
-
-  .card-secondary .card-header {
-    @apply bg-gradient-to-r from-purple-500 to-pink-500;
-  }
-
-  .card-tertiary {
-    @apply card-base border-green-500 hover:shadow-green-500/50;
-  }
-
-  .card-tertiary .card-header {
-    @apply bg-gradient-to-r from-green-500 to-teal-500;
-  }
-
-  .card-quaternary {
-    @apply card-base border-yellow-500 hover:shadow-yellow-500/50;
-  }
-
-  .card-quaternary .card-header {
-    @apply bg-gradient-to-r from-yellow-500 to-orange-500;
-  }
-
   /* Buttons */
   .btn-base {
-    @apply font-bold py-2 px-4 rounded-full transition-all duration-300 transform hover:scale-105;
+    @apply font-bold py-2 px-4 rounded-full;
   }
 
   .btn-primary {
-    @apply btn-base bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white;
-  }
-
-  .btn-secondary {
-    @apply btn-base bg-gradient-to-r from-purple-400 to-pink-500 hover:from-purple-500 hover:to-pink-600 text-white;
-  }
-
-  .btn-tertiary {
-    @apply btn-base bg-gradient-to-r from-green-400 to-teal-500 hover:from-green-500 hover:to-teal-600 text-white;
-  }
-
-  .btn-quaternary {
-    @apply btn-base bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white;
+    @apply btn-base bg-gradient-to-r from-cyan-400 to-blue-500 text-white;
   }
 
   /* Inputs */
   .input-primary {
-    @apply mb-4 bg-gray-700 text-white border-gray-600 focus:border-cyan-500 rounded-full px-4 py-2;
+    @apply mb-4 bg-gray-700 text-white border-gray-600 rounded-full px-4 py-2;
   }
 
   /* Misc */
