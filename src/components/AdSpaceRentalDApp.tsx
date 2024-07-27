@@ -253,7 +253,7 @@ const AdSpaceRentalDApp = () => {
                         {adSpaceInfo.isRented ? (
                             <h2 className="heading-accent">Ad Space RENTED</h2>
                         ) : (
-                            <h2 className="heading-accent">
+                            <h2 className="heading-accent text-flash flash-amber">
                                 Ad Space AVAILABLE
                             </h2>
                         )}

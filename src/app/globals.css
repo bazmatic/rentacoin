@@ -19,6 +19,12 @@
   }
 }
 
+@layer utilities {
+  .flash-amber {
+    text-shadow: 0 0 5px #c2c900, 0 0 10px #c2c900;
+  }
+}
+
 @layer components {
   .content-wrapper {
     @apply w-full flex justify-center;
@@ -142,5 +148,14 @@
 
   .input-primary:-ms-input-placeholder {
     color: rgba(0, 255, 0, 0.5);
+  }
+
+  @keyframes flash {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .text-flash {
+    animation: flash 1s linear infinite;
   }
 }
