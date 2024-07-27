@@ -1,9 +1,11 @@
-import AdSpaceRentalDApp from '../components/AdSpaceRentalDApp';
+import AdSpaceRentalDApp from "../components/AdSpaceRentalDApp";
 
 export default function Home() {
-  return (
-    <main className="main-content">
-      <AdSpaceRentalDApp />
-    </main>
-  );
+    return (
+        <div className="content-wrapper">
+            <main className="main-content">
+                <AdSpaceRentalDApp />
+            </main>
+        </div>
+    );
 }

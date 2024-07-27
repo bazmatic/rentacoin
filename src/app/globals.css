@@ -1,38 +1,58 @@
 /* app/globals.css or styles/globals.css */
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   body {
-    @apply bg-black min-h-screen;
+    @apply bg-black min-h-screen font-mono;
+    font-family: 'VT323', monospace;
   }
 }
 
 @layer components {
+  .content-wrapper {
+    @apply w-full flex justify-center;
+  }
 
   .main-content {
-    @apply flex flex-col items-center justify-center h-full bg-black text-cyan-300;
+    @apply w-1/3 items-center justify-center h-screen bg-black text-green-500;
+    position: relative;
+    overflow: hidden;
   }
-   .container-main {
-    @apply bg-black text-cyan-300 p-8;
-   }
+
+  .container-main {
+    @apply bg-black text-green-500 p-8;
+    position: relative;
+    z-index: 10;
+  }
 
   /* Typography */
   .heading-primary {
-    @apply text-4xl font-bold mb-8 text-center;
+    @apply text-4xl mb-8 text-center text-yellow-400;
+    text-shadow: 0 0 2px #ffcc00, 0 0 4px #ffcc00;
+  }
+
+  .heading-secondary {
+    @apply text-3xl mb-8 text-center text-green-500;
+    text-shadow: 0 0 2px #00ff00, 0 0 4px #00ff00;
+  }
+
+  .heading-accent {
+    @apply mt-4 text-center text-xl font-bold text-yellow-400;
+    text-shadow: 0 0 2px #ffcc00, 0 0 4px #ffcc00;
   }
 
   /* Cards */
   .card-base {
-    @apply bg-gray-800 border-2 rounded-xl;
+    @apply bg-black border-2 border-green-500 rounded-none;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
   }
 
   .card-header {
-    @apply text-white font-bold p-4;
+    @apply text-green-500 font-bold p-4 border-b-2 border-gray-500 mb-4;
   }
 
   .card-content {
@@ -41,24 +61,83 @@
 
   /* Buttons */
   .btn-base {
-    @apply font-bold py-2 px-4 rounded-full;
+    @apply font-bold py-2 px-4 rounded-none transition-all duration-300 hover:opacity-75;
+    background: black;
+    border: 2px solid #00ff00;
+    color: #00ff00;
+    text-shadow: 0 0 5px #00ff00;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+  }
+
+  .btn-base:hover {
+    background: #003300;
   }
 
   .btn-primary {
-    @apply btn-base bg-gradient-to-r from-cyan-400 to-blue-500 text-white;
+    @apply btn-base;
   }
 
   /* Inputs */
   .input-primary {
-    @apply mb-4 bg-gray-700 text-white border-gray-600 rounded-full px-4 py-2;
+    @apply mb-4 bg-black text-green-500 border-2 border-green-500 rounded-none px-4 py-2;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5) inset;
   }
 
   /* Misc */
   .error-message {
-    @apply mb-4 p-4 bg-red-800 text-white rounded-lg;
+    @apply mb-4 p-4 bg-red-900 text-red-500 border-2 border-red-500;
+    text-shadow: 0 0 5px #ff0000;
   }
 
   .loading-indicator {
-    @apply text-2xl text-cyan-300;
+    @apply text-2xl text-green-500;
+    text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+  }
+
+  .crt-ticker {
+    @apply w-full bg-black overflow-hidden mt-4 mb-4;
+    height: 40px;
+    position: relative;
+  }
+
+  .crt-ticker-content {
+    @apply flex items-center text-green-500 whitespace-nowrap;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    animation: ticker 30s linear infinite;
+    text-shadow: 0 0 5px #00ff00;
+  }
+
+  @keyframes ticker {
+    0% {
+      transform: translate3d(100%, -50%, 0);
+    }
+    100% {
+      transform: translate3d(-100%, -50%, 0);
+    }
+  }
+
+  .crt-ticker-item {
+    @apply px-4 text-lg;
+  }
+
+
+  /* Input placeholder styles */
+  .input-primary::placeholder {
+    color: rgba(0, 255, 0, 0.5); /* Muted, dull CRT green */
+  }
+
+  /* For older browsers */
+  .input-primary::-webkit-input-placeholder {
+    color: rgba(0, 255, 0, 0.5);
+  }
+
+  .input-primary::-moz-placeholder {
+    color: rgba(0, 255, 0, 0.5);
+  }
+
+  .input-primary:-ms-input-placeholder {
+    color: rgba(0, 255, 0, 0.5);
   }
 }
