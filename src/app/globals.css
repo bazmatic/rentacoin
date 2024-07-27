@@ -1,5 +1,7 @@
 /* app/globals.css or styles/globals.css */
+/* @import url('https://fonts.cdnfonts.com/css/vt323'); */
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
 
 @tailwind base;
 @tailwind components;
@@ -7,8 +9,13 @@
 
 @layer base {
   body {
-    @apply bg-black min-h-screen font-mono;
+    @apply bg-black min-h-screen;
+    /* font-family: 'VT323', monospace;  */
+  }
+
+  html {
     font-family: 'VT323', monospace;
+    font-size: 24px;
   }
 }
 
@@ -46,10 +53,6 @@
   }
 
   /* Cards */
-  /* .card-base {
-    @apply bg-gray-500 border-2 border-green-500 rounded-none;
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-  } */
 
   .card-header {
     @apply text-green-500 font-bold p-4 border-b-2 border-gray-500 mb-4;

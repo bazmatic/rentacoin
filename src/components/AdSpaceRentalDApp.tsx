@@ -43,8 +43,6 @@ const AdSpaceRentalDApp = () => {
 
     useEffect(() => {
         const loadEthers = async () => {
-            debugger;
-            console.log("loadEthers");
             try {
                 const script = document.createElement("script");
                 script.src =
@@ -86,6 +84,8 @@ const AdSpaceRentalDApp = () => {
         try {
             const isRented = await contract.isRentedNow();
             const nextAvailableDay = await contract.nextAvailableDay();
+
+
             const fee = await contract.fee();
             setAdSpaceInfo({
                 isRented,
@@ -259,9 +259,9 @@ const AdSpaceRentalDApp = () => {
                         )}
                         <p className="mb-2">
                             <span className="font-semibold">
-                                Next slot available in
+                                Next slot available:
                             </span>{" "}
-                            {adSpaceInfo.nextAvailableDay} days
+                            {nextAvailable(adSpaceInfo.nextAvailableDay)} 
                         </p>
                         <p className="mb-2">
                             <span className="font-semibold">Base Fee:</span>{" "}
@@ -335,5 +335,15 @@ const AdSpaceRentalDApp = () => {
         </div>
     );
 };
+
+function nextAvailable(day: number) {
+    if (day === 0) {
+        return "Today";
+    }
+    if (day === 1) {
+        return "Tomorrow";
+    }
+    return `In ${day} days`;
+}
 
 export default AdSpaceRentalDApp;
