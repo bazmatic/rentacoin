@@ -41,15 +41,15 @@
   }
 
   .heading-accent {
-    @apply mt-4 text-center text-xl font-bold text-yellow-400;
+    @apply mt-4 text-center text-xl font-bold text-yellow-400 mb-4;
     text-shadow: 0 0 2px #ffcc00, 0 0 4px #ffcc00;
   }
 
   /* Cards */
-  .card-base {
-    @apply bg-black border-2 border-green-500 rounded-none;
+  /* .card-base {
+    @apply bg-gray-500 border-2 border-green-500 rounded-none;
     box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-  }
+  } */
 
   .card-header {
     @apply text-green-500 font-bold p-4 border-b-2 border-gray-500 mb-4;

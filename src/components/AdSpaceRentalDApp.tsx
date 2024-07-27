@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { CONTRACT_ABI } from "@/abi";
-import CRTTicker from "./ui/ticker";
+import OldSchoolTicker from "./ui/ticker";
 
 declare const ethers: any;
 declare global {
@@ -239,7 +239,7 @@ const AdSpaceRentalDApp = () => {
         <div className="container-main">
             <h1 className="heading-primary">{tokenInfo.symbol}</h1>
             <h2 className="heading-secondary">{tokenInfo.name}</h2>
-            <CRTTicker
+            <OldSchoolTicker
                 items={[CONTRACT_ADDRESS, tokenInfo.symbol, tokenInfo.name]}
             />
 
@@ -248,56 +248,20 @@ const AdSpaceRentalDApp = () => {
             )}
 
             <div>
-                {/* <Card className="card-primary">
-                    <CardHeader className="card-header">
-                        Token Information
-                    </CardHeader>
-                    <CardContent className="card-content">
-                        <p className="mb-2">
-                            <span className="font-semibold">Name:</span>{" "}
-                            {tokenInfo.name}
-                        </p>
-                        <p className="mb-2">
-                            <span className="font-semibold">Symbol:</span>{" "}
-                            {tokenInfo.symbol}
-                        </p>
-                        <p className="mb-2">
-                            <span className="font-semibold">Total Supply:</span>{" "}
-                            {tokenInfo.totalSupply} {tokenInfo.symbol}
-                        </p>
-                        <p className="mb-2">
-                            <span className="font-semibold">Contract:</span>
-                            <span className="text-xs break-all">
-                                {CONTRACT_ADDRESS}
-                            </span>
-                        </p>
-                    </CardContent>
-                </Card> */}
-
                 <Card className="card-primary">
-                    <CardHeader className="card-header">
-                        Ad Space Information
-                    </CardHeader>
-                    <CardContent className="card-content">
+                    <CardContent className="card-content text-center">
+                        {adSpaceInfo.isRented ? (
+                            <h2 className="heading-accent">Ad Space RENTED</h2>
+                        ) : (
+                            <h2 className="heading-accent">
+                                Ad Space AVAILABLE
+                            </h2>
+                        )}
                         <p className="mb-2">
                             <span className="font-semibold">
-                                Currently Rented:
-                            </span>
-                            <span
-                                className={
-                                    adSpaceInfo.isRented
-                                        ? "text-green-400"
-                                        : "text-red-400"
-                                }
-                            >
-                                {adSpaceInfo.isRented ? "Yes" : "No"}
-                            </span>
-                        </p>
-                        <p className="mb-2">
-                            <span className="font-semibold">
-                                Next Available Day:
+                                Next slot available in
                             </span>{" "}
-                            {adSpaceInfo.nextAvailableDay}
+                            {adSpaceInfo.nextAvailableDay} days
                         </p>
                         <p className="mb-2">
                             <span className="font-semibold">Base Fee:</span>{" "}
@@ -308,8 +272,8 @@ const AdSpaceRentalDApp = () => {
             </div>
 
             <Card className="card-quaternary mt-8">
-                <CardHeader className="card-header">Rent Ad Space</CardHeader>
-                <CardContent className="card-content">
+                <CardContent className="card-content text-center">
+                    <h2 className="heading-accent">Rent Next Slot</h2>
                     <Input
                         className="input-primary"
                         placeholder="Duration (in days)"

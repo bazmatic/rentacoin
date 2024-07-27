@@ -4,7 +4,7 @@ interface TickerProps {
   items: string[];
 }
 
-const CRTTicker: React.FC<TickerProps> = ({ items }) => {
+const OldSchoolTicker: React.FC<TickerProps> = ({ items }) => {
   return (
     <div className="crt-ticker">
       <div className="crt-ticker-content">
@@ -20,4 +20,4 @@ const CRTTicker: React.FC<TickerProps> = ({ items }) => {
   );
 };
 
-export default CRTTicker;
+export default OldSchoolTicker;
