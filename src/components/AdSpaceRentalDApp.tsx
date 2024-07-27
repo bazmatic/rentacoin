@@ -24,7 +24,7 @@ const AdSpaceRentalDApp = () => {
     const [tokenInfo, setTokenInfo] = useState({
         name: "Rent Me",
         symbol: DEFAULT_SYMBOL,
-        totalSupply: ""
+        totalSupply: "0"
     });
     const [adSpaceInfo, setAdSpaceInfo] = useState({
         isRented: false,
@@ -64,9 +64,14 @@ const AdSpaceRentalDApp = () => {
 
     const loadTokenInfo = async (contract: any) => {
         try {
-            const name = await contract.name();
-            const symbol = await contract.symbol();
+            let name = await contract.name();
+            let symbol = await contract.symbol();
             const totalSupply = await contract.totalSupply();
+            if (name === "" || symbol === "") {
+                name = "This Coin For Rent";
+                symbol = DEFAULT_SYMBOL;
+            }
+
             setTokenInfo({
                 name,
                 symbol,
@@ -240,7 +245,7 @@ const AdSpaceRentalDApp = () => {
             <h1 className="heading-primary">{tokenInfo.symbol}</h1>
             <h2 className="heading-secondary">{tokenInfo.name}</h2>
             <OldSchoolTicker
-                items={[CONTRACT_ADDRESS, tokenInfo.symbol, tokenInfo.name]}
+                items={[CONTRACT_ADDRESS, tokenInfo.symbol, tokenInfo.name, "I paid for this message and now you have to read it"]}
             />
 
             {networkError && (
