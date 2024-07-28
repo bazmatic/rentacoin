@@ -92,7 +92,7 @@
   /* Misc */
   .error-message {
     @apply mb-2 sm:mb-3 md:mb-4 p-2 sm:p-3 md:p-4 bg-red-900 text-red-500 border-2 border-red-500 text-sm sm:text-base md:text-lg;
-    text-shadow: 0 0 5px #ff0000;
+    text-shadow: 0 0 5px #990000;
   }
 
   .loading-indicator {
@@ -160,5 +160,25 @@
 
   .text-flash {
     animation: flash 1s linear infinite;
+  }
+
+  .loading-indicator {
+    @apply text-xl sm:text-2xl md:text-3xl text-green-500;
+    text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+  }
+
+  .loading-ellipsis::after {
+    content: '...';
+    display: inline-block;
+    animation: ellipsis-animation 1.5s infinite;
+    width: 1em;
+    text-align: left;
+  }
+
+  @keyframes ellipsis-animation {
+    0% { content: '.'; }
+    33% { content: '..'; }
+    66% { content: '...'; }
+    100% { content: ''; }
   }
 }

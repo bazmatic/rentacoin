@@ -90,7 +90,6 @@ const AdSpaceRentalDApp = () => {
             const isRented = await contract.isRentedNow();
             const nextAvailableDay = await contract.nextAvailableDay();
 
-
             const fee = await contract.fee();
             setAdSpaceInfo({
                 isRented,
@@ -235,7 +234,11 @@ const AdSpaceRentalDApp = () => {
     if (isLoading) {
         return (
             <div className="container-main flex items-center justify-center">
-                <p className="loading-indicator">Loading...</p>
+                <div className="container-main flex items-center justify-center">
+                    <p className="loading-indicator">
+                        Loading<span className="loading-ellipsis"></span>
+                    </p>
+                </div>
             </div>
         );
     }
@@ -248,7 +251,8 @@ const AdSpaceRentalDApp = () => {
                 items={[CONTRACT_ADDRESS, tokenInfo.symbol, tokenInfo.name]}
             /> */}
             <p className="text-center mb-4">
-                Change the token name and symbol in the contract to sell your message.
+                Change the token name and symbol in the contract to sell your
+                message.
             </p>
 
             {networkError && (
@@ -269,7 +273,7 @@ const AdSpaceRentalDApp = () => {
                             <span className="font-semibold">
                                 Next slot available:
                             </span>{" "}
-                            {nextAvailable(adSpaceInfo.nextAvailableDay)} 
+                            {nextAvailable(adSpaceInfo.nextAvailableDay)}
                         </p>
                         <p className="mb-2">
                             <span className="font-semibold">Base Fee:</span>{" "}
@@ -338,6 +342,11 @@ const AdSpaceRentalDApp = () => {
                     <Button className="btn-primary" onClick={connectMetaMask}>
                         Connect MetaMask
                     </Button>
+                    <p>
+                        <a href="sepolia.etherscan.io/address/0x574637eA3d48Ae16255620164f06f0d435982c8e">
+                            {CONTRACT_ADDRESS}
+                        </a>
+                    </p>
                 </p>
             )}
         </div>
