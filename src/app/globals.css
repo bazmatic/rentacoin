@@ -1,7 +1,5 @@
 /* app/globals.css or styles/globals.css */
-/* @import url('https://fonts.cdnfonts.com/css/vt323'); */
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
-
 
 @tailwind base;
 @tailwind components;
@@ -10,12 +8,12 @@
 @layer base {
   body {
     @apply bg-black min-h-screen;
-    /* font-family: 'VT323', monospace;  */
   }
 
   html {
     font-family: 'VT323', monospace;
-    font-size: 24px;
+    font-size: 16px;
+    @apply sm:text-lg md:text-xl lg:text-2xl;
   }
 }
 
@@ -31,46 +29,45 @@
   }
 
   .main-content {
-    @apply w-1/3 items-center justify-center h-screen bg-black text-green-500;
+    @apply w-full sm:w-5/6 md:w-3/4 lg:w-2/3 xl:w-1/2 items-center justify-center min-h-screen bg-black text-green-500;
     position: relative;
     overflow: hidden;
   }
 
   .container-main {
-    @apply bg-black text-green-500 p-8;
+    @apply bg-black text-green-500 p-4 sm:p-6 md:p-8;
     position: relative;
     z-index: 10;
   }
 
   /* Typography */
   .heading-primary {
-    @apply text-4xl mb-8 text-center text-yellow-400;
+    @apply text-2xl sm:text-3xl md:text-4xl mb-4 sm:mb-6 md:mb-8 text-center text-yellow-400;
     text-shadow: 0 0 2px #ffcc00, 0 0 4px #ffcc00;
   }
 
   .heading-secondary {
-    @apply text-3xl mb-8 text-center text-green-500;
+    @apply text-xl sm:text-2xl md:text-3xl mb-4 sm:mb-6 md:mb-8 text-center text-green-500;
     text-shadow: 0 0 2px #00ff00, 0 0 4px #00ff00;
   }
 
   .heading-accent {
-    @apply mt-4 text-center text-xl font-bold text-yellow-400 mb-4;
+    @apply mt-2 sm:mt-3 md:mt-4 text-center text-lg sm:text-xl font-bold text-yellow-400 mb-2 sm:mb-3 md:mb-4;
     text-shadow: 0 0 2px #ffcc00, 0 0 4px #ffcc00;
   }
 
   /* Cards */
-
   .card-header {
-    @apply text-green-500 font-bold p-4 border-b-2 border-gray-500 mb-4;
+    @apply text-green-500 font-bold p-2 sm:p-3 md:p-4 border-b-2 border-gray-500 mb-2 sm:mb-3 md:mb-4;
   }
 
   .card-content {
-    @apply p-4;
+    @apply p-2 sm:p-3 md:p-4;
   }
 
   /* Buttons */
   .btn-base {
-    @apply font-bold py-2 px-4 rounded-none transition-all duration-300 hover:opacity-75;
+    @apply font-bold py-1 sm:py-2 px-2 sm:px-4 rounded-none transition-all duration-300 hover:opacity-75 text-sm sm:text-base md:text-lg;
     background: black;
     border: 2px solid #00ff00;
     color: #00ff00;
@@ -88,29 +85,29 @@
 
   /* Inputs */
   .input-primary {
-    @apply mb-4 bg-black text-green-500 border-2 border-green-500 rounded-none px-4 py-2;
+    @apply mb-2 sm:mb-3 md:mb-4 bg-black text-green-500 border-2 border-green-500 rounded-none px-2 sm:px-3 md:px-4 py-1 sm:py-2 w-full text-sm sm:text-base md:text-lg;
     box-shadow: 0 0 10px rgba(0, 255, 0, 0.5) inset;
   }
 
   /* Misc */
   .error-message {
-    @apply mb-4 p-4 bg-red-900 text-red-500 border-2 border-red-500;
+    @apply mb-2 sm:mb-3 md:mb-4 p-2 sm:p-3 md:p-4 bg-red-900 text-red-500 border-2 border-red-500 text-sm sm:text-base md:text-lg;
     text-shadow: 0 0 5px #ff0000;
   }
 
   .loading-indicator {
-    @apply text-2xl text-green-500;
+    @apply text-xl sm:text-2xl md:text-3xl text-green-500;
     text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
   }
 
   .crt-ticker {
-    @apply w-full bg-black overflow-hidden mt-4 mb-4;
-    height: 40px;
+    @apply w-full bg-black overflow-hidden mt-2 sm:mt-3 md:mt-4 mb-2 sm:mb-3 md:mb-4;
+    height: 30px;
     position: relative;
   }
 
   .crt-ticker-content {
-    @apply flex items-center text-green-500 whitespace-nowrap;
+    @apply flex items-center text-green-500 whitespace-nowrap text-sm sm:text-base md:text-lg;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -122,22 +119,21 @@
     0% {
       transform: translate3d(100%, -50%, 0);
     }
+
     100% {
       transform: translate3d(-100%, -50%, 0);
     }
   }
 
   .crt-ticker-item {
-    @apply px-4 text-lg;
+    @apply px-2 sm:px-3 md:px-4;
   }
-
 
   /* Input placeholder styles */
   .input-primary::placeholder {
-    color: rgba(0, 255, 0, 0.5); /* Muted, dull CRT green */
+    color: rgba(0, 255, 0, 0.5);
   }
 
-  /* For older browsers */
   .input-primary::-webkit-input-placeholder {
     color: rgba(0, 255, 0, 0.5);
   }
@@ -151,8 +147,15 @@
   }
 
   @keyframes flash {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0;
+    }
   }
 
   .text-flash {
