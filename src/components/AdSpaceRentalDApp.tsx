@@ -38,7 +38,7 @@ const AdSpaceRentalDApp = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [networkError, setNetworkError] = useState("");
 
-    const CONTRACT_ADDRESS = "0x574637eA3d48Ae16255620164f06f0d435982c8e";
+    const CONTRACT_ADDRESS = "0x5B9a01C6FCd8a516B1791E3d0508385565C2b6f7";
     const NETWORK_ID = 11155111; // Sepolia network ID
 
     useEffect(() => {
@@ -327,7 +327,7 @@ const AdSpaceRentalDApp = () => {
                 </CardContent>
             </Card>
             {account ? (
-                <div>
+                <div className="mt-8 text-center">
                     <p className="mb-2">
                         <span className="font-semibold">Connected:</span>
                         <span className="text-xs break-all">{account}</span>
@@ -338,7 +338,7 @@ const AdSpaceRentalDApp = () => {
                     </p>
                 </div>
             ) : (
-                <p className="mt-8 text-center">
+                <div className="mt-8 text-center">
                     <Button className="btn-primary" onClick={connectMetaMask}>
                         Connect MetaMask
                     </Button>
@@ -347,7 +347,7 @@ const AdSpaceRentalDApp = () => {
                             {CONTRACT_ADDRESS}
                         </a>
                     </p>
-                </p>
+                </div>
             )}
         </div>
     );
