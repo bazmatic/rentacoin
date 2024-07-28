@@ -244,10 +244,10 @@ const AdSpaceRentalDApp = () => {
         <div className="container-main">
             <h1 className="heading-primary">{tokenInfo.symbol}</h1>
             <h2 className="heading-secondary">{tokenInfo.name}</h2>
-            <OldSchoolTicker
+            {/* <OldSchoolTicker
                 items={[CONTRACT_ADDRESS, tokenInfo.symbol, tokenInfo.name]}
-            />
-            <p className="text-center">
+            /> */}
+            <p className="text-center mb-4">
                 Change the token name and symbol in the contract to sell your message.
             </p>
 
