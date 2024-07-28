@@ -28,7 +28,7 @@ const AdSpaceRentalDApp = () => {
     });
     const [adSpaceInfo, setAdSpaceInfo] = useState({
         isRented: false,
-        nextAvailableDay: 0,
+        daysToWait: 0,
         fee: "0"
     });
     const [rentSymbol, setRentSymbol] = useState("");
@@ -89,11 +89,13 @@ const AdSpaceRentalDApp = () => {
         try {
             const isRented = await contract.isRentedNow();
             const nextAvailableDay = await contract.nextAvailableDay();
+            const today = await contract.getDayFromTimestamp(Math.floor(new Date().getTime()/1000));
+            const daysToWait = (nextAvailableDay.toNumber() - today)/(60 * 60 * 24);
 
             const fee = await contract.fee();
             setAdSpaceInfo({
                 isRented,
-                nextAvailableDay: nextAvailableDay.toNumber(),
+                daysToWait,
                 fee: ethers.utils.formatEther(fee)
             });
         } catch (error) {
@@ -273,9 +275,9 @@ const AdSpaceRentalDApp = () => {
                             <span className="font-semibold">
                                 Next slot available:
                             </span>{" "}
-                            {nextAvailable(adSpaceInfo.nextAvailableDay)}
+                            {nextAvailable(adSpaceInfo.daysToWait)}
                         </p>
-                        <p className="mb-2">
+                        <p>
                             <span className="font-semibold">Base Fee:</span>{" "}
                             {adSpaceInfo.fee} ETH
                         </p>
