@@ -245,8 +245,11 @@ const AdSpaceRentalDApp = () => {
             <h1 className="heading-primary">{tokenInfo.symbol}</h1>
             <h2 className="heading-secondary">{tokenInfo.name}</h2>
             <OldSchoolTicker
-                items={[CONTRACT_ADDRESS, tokenInfo.symbol, tokenInfo.name, "I paid for this message and now you have to read it"]}
+                items={[CONTRACT_ADDRESS, tokenInfo.symbol, tokenInfo.name]}
             />
+            <p className="text-center">
+                Change the token name and symbol in the contract to sell your message.
+            </p>
 
             {networkError && (
                 <div className="error-message">{networkError}</div>
