@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ChangeEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { CONTRACT_ABI } from "@/abi";
-import OldSchoolTicker from "./ui/ticker";
 
 declare const ethers: any;
 declare global {
@@ -37,6 +37,7 @@ const AdSpaceRentalDApp = () => {
     const [quoteAmount, setQuoteAmount] = useState("");
     const [isLoading, setIsLoading] = useState(true);
     const [networkError, setNetworkError] = useState("");
+    const [payWithTokens, setPayWithTokens] = useState(false);
 
     const CONTRACT_ADDRESS = "0x5B9a01C6FCd8a516B1791E3d0508385565C2b6f7";
     const NETWORK_ID = 11155111; // Sepolia network ID
@@ -89,8 +90,11 @@ const AdSpaceRentalDApp = () => {
         try {
             const isRented = await contract.isRentedNow();
             const nextAvailableDay = await contract.nextAvailableDay();
-            const today = await contract.getDayFromTimestamp(Math.floor(new Date().getTime()/1000));
-            const daysToWait = (nextAvailableDay.toNumber() - today)/(60 * 60 * 24);
+            const today = await contract.getDayFromTimestamp(
+                Math.floor(new Date().getTime() / 1000)
+            );
+            const daysToWait =
+                (nextAvailableDay.toNumber() - today) / (60 * 60 * 24);
 
             const fee = await contract.fee();
             setAdSpaceInfo({
@@ -198,7 +202,9 @@ const AdSpaceRentalDApp = () => {
     const handleQuote = async () => {
         if (contract && rentDuration) {
             try {
-                const quote = await contract.quote(rentDuration);
+                const quote = payWithTokens
+                    ? await contract.tokenQuote(rentDuration)
+                    : await contract.quote(rentDuration);
                 setQuoteAmount(ethers.utils.formatEther(quote));
             } catch (error) {
                 console.error("Error getting quote:", error);
@@ -212,15 +218,22 @@ const AdSpaceRentalDApp = () => {
     const handleRentAdSpace = async () => {
         if (contract && signer && rentDuration && rentSymbol && rentMessage) {
             try {
-                const quote = await contract.quote(rentDuration);
-                const nextAvailableDay = await contract.nextAvailableDay();
-                const tx = await contract.rentAdSpace(
-                    nextAvailableDay.toNumber(),
-                    rentDuration,
-                    rentSymbol,
-                    rentMessage,
-                    { value: quote }
-                );
+                let tx;
+                if (payWithTokens) {
+                    tx = await contract.rentAdSpaceNowWithTokens(
+                        rentDuration,
+                        rentSymbol,
+                        rentMessage
+                    );
+                } else {
+                    const quote = await contract.quote(rentDuration);
+                    tx = await contract.rentAdSpaceNow(
+                        rentDuration,
+                        rentSymbol,
+                        rentMessage,
+                        { value: quote }
+                    );
+                }
                 await tx.wait();
                 await loadAdSpaceInfo(contract);
             } catch (error) {
@@ -309,7 +322,16 @@ const AdSpaceRentalDApp = () => {
                         value={rentMessage}
                         onChange={e => setRentMessage(e.target.value)}
                     />
-                    <div className="flex space-x-4">
+                    <Checkbox
+                        id="payWithTokens"
+                        checked={payWithTokens}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                            setPayWithTokens(e.target.checked)
+                        }
+                        disabled={adSpaceInfo.isRented}
+                        label={`Pay with ${tokenInfo.symbol} (Only available if currently unrented)`}
+                    />
+                    <div className="flex space-x-4 mt-4">
                         <Button
                             onClick={handleQuote}
                             className="btn-primary flex-1"
@@ -325,12 +347,14 @@ const AdSpaceRentalDApp = () => {
                         </Button>
                     </div>
                     {quoteAmount && (
-                        <p className="heading-accent">
-                            Quote: {quoteAmount} ETH
+                        <p className="heading-accent mt-4">
+                            Quote: {quoteAmount}{" "}
+                            {payWithTokens ? tokenInfo.symbol : "ETH"}
                         </p>
                     )}
                 </CardContent>
             </Card>
+
             {account ? (
                 <div className="mt-8 text-center">
                     <p className="mb-2">
