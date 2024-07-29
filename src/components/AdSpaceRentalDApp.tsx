@@ -147,6 +147,7 @@ const AdSpaceRentalDApp = () => {
     };
 
     const connectMetaMask = async () => {
+        debugger;
         if (typeof window.ethereum !== "undefined") {
             try {
                 await window.ethereum.request({
@@ -212,7 +213,9 @@ const AdSpaceRentalDApp = () => {
         if (contract && signer && rentDuration && rentSymbol && rentMessage) {
             try {
                 const quote = await contract.quote(rentDuration);
-                const tx = await contract.rentAdSpaceNow(
+                const nextAvailableDay = await contract.nextAvailableDay();
+                const tx = await contract.rentAdSpace(
+                    nextAvailableDay.toNumber(),
                     rentDuration,
                     rentSymbol,
                     rentMessage,
