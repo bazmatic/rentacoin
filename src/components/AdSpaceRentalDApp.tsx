@@ -372,7 +372,7 @@ const AdSpaceRentalDApp = () => {
                         Connect MetaMask
                     </Button>
                     <p>
-                        <a href="sepolia.etherscan.io/address/0x574637eA3d48Ae16255620164f06f0d435982c8e">
+                        <a href="https://sepolia.etherscan.io/address/0x574637eA3d48Ae16255620164f06f0d435982c8e">
                             {CONTRACT_ADDRESS}
                         </a>
                     </p>
