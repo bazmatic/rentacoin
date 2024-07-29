@@ -355,29 +355,32 @@ const AdSpaceRentalDApp = () => {
                 </CardContent>
             </Card>
 
-            {account ? (
-                <div className="mt-8 text-center">
-                    <p className="mb-2">
-                        <span className="font-semibold">Connected:</span>
-                        <span className="text-xs break-all">{account}</span>
-                    </p>
-                    <p className="mb-2">
-                        <span className="font-semibold">Balance:</span>{" "}
-                        {balance} {tokenInfo.symbol}
-                    </p>
-                </div>
-            ) : (
-                <div className="mt-8 text-center">
+            <div className="mt-8 text-center">
+                {account ? (
+                    <>
+                        <p className="mb-2">
+                            <span className="font-semibold">
+                                Connected to wallet{" "}
+                            </span>
+                            <span>{account}</span>
+                        </p>
+                        <p className="mb-2">
+                            <span className="font-semibold">Balance:</span>{" "}
+                            {balance} {tokenInfo.symbol}
+                        </p>
+                    </>
+                ) : (
                     <Button className="btn-primary" onClick={connectMetaMask}>
                         Connect MetaMask
                     </Button>
-                    <p>
-                        <a href="https://sepolia.etherscan.io/address/0x574637eA3d48Ae16255620164f06f0d435982c8e">
-                            {CONTRACT_ADDRESS}
-                        </a>
-                    </p>
-                </div>
-            )}
+                )}
+                <p>
+                    Contract:{" "}
+                    <a href="https://sepolia.etherscan.io/address/0x574637eA3d48Ae16255620164f06f0d435982c8e">
+                        {CONTRACT_ADDRESS}
+                    </a>
+                </p>
+            </div>
         </div>
     );
 };
